@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:big_spender/model/expense.dart';
 import 'package:big_spender/widgets/expenses_list/expenses_list.dart';
+import 'package:big_spender/widgets/gradient_border_fab.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({Key? key}) : super(key: key);
@@ -35,12 +36,11 @@ class _ExpensesState extends State<Expenses> {
       body: Column(
         children: [
           const Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 40.0, horizontal: 16.0),
+            padding: EdgeInsets.symmetric(vertical: 60.0, horizontal: 16.0),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Your Expenses',
+                'Your expenses',
                 style: TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
@@ -52,31 +52,7 @@ class _ExpensesState extends State<Expenses> {
           Expanded(child: ExpensesList(expenses: _registeredExpenses))
         ],
       ),
-      floatingActionButton: Container(
-        width: 80,
-        height: 80,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromARGB(255, 0, 255, 175),
-              Color.fromARGB(255, 32, 223, 255)
-            ], // replace with your colors
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(2),
-          child: FittedBox(
-            child: FloatingActionButton(
-              onPressed: _addExpense,
-              backgroundColor: Colors.black87,
-              child: const Icon(Icons.add),
-            ),
-          ),
-        ),
-      ),
+      floatingActionButton: GradientBorderFab(onPressed: _addExpense),
     );
   }
 }
