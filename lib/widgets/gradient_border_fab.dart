@@ -11,9 +11,9 @@ class GradientBorderFab extends StatelessWidget {
     return Container(
       width: 80,
       height: 80,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        gradient: const LinearGradient(
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
@@ -28,7 +28,8 @@ class GradientBorderFab extends StatelessWidget {
           child: FloatingActionButton(
             onPressed: onPressed,
             backgroundColor: Colors.black87,
-            child: const Icon(Icons.add),
+            shape: const CircleBorder(),
+            child: const Icon(Icons.add, color: Colors.white),
           ),
         ),
       ),
