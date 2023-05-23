@@ -32,19 +32,50 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Big Spender'),
-      ),
       body: Column(
         children: [
+          const Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 40.0, horizontal: 16.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Your Expenses',
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
           const Text('The chart'),
           Expanded(child: ExpensesList(expenses: _registeredExpenses))
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _addExpense,
-        tooltip: 'Add Expense',
-        child: Icon(Icons.add),
+      floatingActionButton: Container(
+        width: 80,
+        height: 80,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 0, 255, 175),
+              Color.fromARGB(255, 32, 223, 255)
+            ], // replace with your colors
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(2),
+          child: FittedBox(
+            child: FloatingActionButton(
+              onPressed: _addExpense,
+              backgroundColor: Colors.black87,
+              child: const Icon(Icons.add),
+            ),
+          ),
+        ),
       ),
     );
   }
