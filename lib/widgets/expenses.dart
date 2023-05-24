@@ -26,8 +26,9 @@ class _ExpensesState extends State<Expenses> {
         category: Category.leisure)
   ];
 
-  void _addExpense() {
-    // TODO: Add your code to navigate to add expense screen or open a dialog here
+  void _addExpenseOverlay() {
+    showModalBottomSheet(
+        context: context, builder: (ctx) => const Text('Add expense'));
   }
 
   @override
@@ -52,7 +53,7 @@ class _ExpensesState extends State<Expenses> {
           Expanded(child: ExpensesList(expenses: _registeredExpenses))
         ],
       ),
-      floatingActionButton: GradientBorderFab(onPressed: _addExpense),
+      floatingActionButton: GradientBorderFab(onPressed: _addExpenseOverlay),
     );
   }
 }
