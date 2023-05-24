@@ -11,12 +11,20 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Expanded(child: NumPad()),
-        ],
+    return SizedBox(
+      height: MediaQuery.of(context)
+          .size
+          .height, // set height to full screen height
+      child: const Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 200,
+            ),
+            Expanded(child: NumPad()),
+          ],
+        ),
       ),
     );
   }

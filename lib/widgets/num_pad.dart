@@ -36,10 +36,11 @@ class _NumPadState extends State<NumPad> {
         _append(value);
       },
       child: Container(
+        padding: const EdgeInsets.all(5.0), // adjust padding as necessary
         alignment: Alignment.center,
         child: Text(
           value,
-          style: const TextStyle(fontSize: 36),
+          style: const TextStyle(fontSize: 24), // adjust font size as necessary
         ),
       ),
     );
