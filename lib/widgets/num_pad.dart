@@ -55,40 +55,48 @@ class _NumPadState extends State<NumPad> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: <Widget>[
-        Text(
-          _output,
-          style: const TextStyle(fontSize: 48),
+        Align(
+          alignment: const Alignment(
+              0, -0.7), // Adjust this value for vertical position of the output
+          child: Text(
+            _output,
+            style: const TextStyle(fontSize: 48),
+          ),
         ),
-        Expanded(
-          child: GridView.count(
-            crossAxisCount: 3,
-            childAspectRatio: 3 / 2,
-            children: <Widget>[
-              for (var i = 1; i < 10; i++) _numButton(i.toString()),
-              _numButton("."),
-              _numButton("0"),
-              Container(
-                margin: const EdgeInsets.all(4.0), // And here
-                child: GestureDetector(
-                  onTap: _delete,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.blue,
-                        width: 2.0,
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: FractionallySizedBox(
+            heightFactor: 0.55, // Adjust the fraction of total height here
+            child: GridView.count(
+              crossAxisCount: 3,
+              childAspectRatio: 3 / 2,
+              children: <Widget>[
+                for (var i = 1; i < 10; i++) _numButton(i.toString()),
+                _numButton("."),
+                _numButton("0"),
+                Container(
+                  margin: const EdgeInsets.all(4.0),
+                  child: GestureDetector(
+                    onTap: _delete,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.blue,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(32),
                       ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: const Icon(Icons.backspace),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: const Icon(Icons.backspace),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
