@@ -36,20 +36,18 @@ class _NumPadState extends State<NumPad> {
         _append(value);
       },
       child: Container(
-        margin: const EdgeInsets.all(4.0), // Space between buttons
-        width: 80, // Set the width
-        height: 40, // Set the height
+        margin: const EdgeInsets.all(6.0), // Here
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.blue, // Specify the border color
-            width: 2.0, // Specify the border thickness
+            color: Colors.blue,
+            width: 2.0,
           ),
-          borderRadius: BorderRadius.circular(32), // Border radius
+          borderRadius: BorderRadius.circular(12),
         ),
         alignment: Alignment.center,
         child: Text(
           value,
-          style: const TextStyle(fontSize: 24), // adjust font size as necessary
+          style: const TextStyle(fontSize: 24),
         ),
       ),
     );
@@ -66,15 +64,28 @@ class _NumPadState extends State<NumPad> {
         Expanded(
           child: GridView.count(
             crossAxisCount: 3,
+            childAspectRatio: 3 / 2,
             children: <Widget>[
               for (var i = 1; i < 10; i++) _numButton(i.toString()),
               _numButton("."),
               _numButton("0"),
-              GestureDetector(
-                onTap: _delete,
-                child: Container(
-                  alignment: Alignment.center,
-                  child: const Icon(Icons.backspace),
+              Container(
+                margin: const EdgeInsets.all(4.0), // And here
+                child: GestureDetector(
+                  onTap: _delete,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.blue,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: const Icon(Icons.backspace),
+                    ),
+                  ),
                 ),
               ),
             ],
