@@ -30,24 +30,41 @@ class _NumPadState extends State<NumPad> {
     });
   }
 
-  Widget _numButton(String value) {
+  Widget _numButton(String? value, {void Function()? onTap, IconData? icon}) {
     return GestureDetector(
-      onTap: () {
-        _append(value);
-      },
+      onTap: onTap ??
+          () {
+            _append(value!);
+          },
       child: Container(
-        margin: const EdgeInsets.all(6.0), // Here
+        margin: const EdgeInsets.all(4.0),
         decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.blue,
-            width: 2.0,
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 0, 255, 175),
+              Color.fromARGB(255, 32, 223, 255)
+            ],
           ),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
         ),
-        alignment: Alignment.center,
-        child: Text(
-          value,
-          style: const TextStyle(fontSize: 24),
+        child: Center(
+          child: Container(
+            height: 68, // size of the button
+            width: 107, // size of the button
+            decoration: BoxDecoration(
+              color: Colors.black87, // fill color
+              borderRadius: BorderRadius.circular(16),
+            ),
+            alignment: Alignment.center,
+            child: icon == null
+                ? Text(
+                    value!,
+                    style: const TextStyle(fontSize: 30, color: Colors.white),
+                  )
+                : Icon(icon, size: 30, color: Colors.white),
+          ),
         ),
       ),
     );
@@ -58,17 +75,42 @@ class _NumPadState extends State<NumPad> {
     return Stack(
       children: <Widget>[
         Align(
-          alignment: const Alignment(
-              0, -0.7), // Adjust this value for vertical position of the output
+          alignment: const Alignment(0, -0.9),
           child: Text(
             _output,
-            style: const TextStyle(fontSize: 48),
+            style: const TextStyle(fontSize: 64),
           ),
         ),
+        if (_output != "0")
+          Align(
+            alignment: const Alignment(0.95, -0.9),
+            child: Container(
+              margin: const EdgeInsets.all(4.0),
+              width: 40, // change as needed
+              height: 40, // change as needed
+              child: GestureDetector(
+                onTap: _delete,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: const Icon(Icons.backspace,
+                        size: 24), // adjust icon size as necessary
+                  ),
+                ),
+              ),
+            ),
+          ),
         Align(
           alignment: Alignment.bottomCenter,
           child: FractionallySizedBox(
-            heightFactor: 0.55, // Adjust the fraction of total height here
+            heightFactor: 0.55,
             child: GridView.count(
               crossAxisCount: 3,
               childAspectRatio: 3 / 2,
@@ -76,25 +118,7 @@ class _NumPadState extends State<NumPad> {
                 for (var i = 1; i < 10; i++) _numButton(i.toString()),
                 _numButton("."),
                 _numButton("0"),
-                Container(
-                  margin: const EdgeInsets.all(4.0),
-                  child: GestureDetector(
-                    onTap: _delete,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.blue,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: const Icon(Icons.backspace),
-                      ),
-                    ),
-                  ),
-                ),
+                _numButton(null, onTap: () {}, icon: Icons.check),
               ],
             ),
           ),
