@@ -36,7 +36,16 @@ class _NumPadState extends State<NumPad> {
         _append(value);
       },
       child: Container(
-        padding: const EdgeInsets.all(5.0), // adjust padding as necessary
+        margin: const EdgeInsets.all(4.0), // Space between buttons
+        width: 80, // Set the width
+        height: 40, // Set the height
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.blue, // Specify the border color
+            width: 2.0, // Specify the border thickness
+          ),
+          borderRadius: BorderRadius.circular(32), // Border radius
+        ),
         alignment: Alignment.center,
         child: Text(
           value,
