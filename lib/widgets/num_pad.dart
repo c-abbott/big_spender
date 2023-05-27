@@ -59,21 +59,40 @@ class _NumPadState extends State<NumPad> {
     }
   }
 
-  Widget _DateTimePickerButton() {
-    return Align(
-      alignment: Alignment(-1.0, -0.65),
-      child: GestureDetector(
-        onTap: () async {
-          await _selectDate(context);
-          await _selectTime(context);
-        },
-        child: Text(
-          "${DateFormat.yMd().format(selectedDate)} ${DateFormat.Hm().format(selectedDate)}",
-          style: TextStyle(
-            fontSize: 24,
-            fontFamily: 'ProximaNova',
-          ),
+  Widget _dateButton() {
+    return GestureDetector(
+      onTap: () => _selectDate(context),
+      child: Text(
+        DateFormat.yMd().format(selectedDate),
+        style: const TextStyle(
+          fontSize: 24,
+          fontFamily: 'ProximaNova',
         ),
+      ),
+    );
+  }
+
+  Widget _timeButton() {
+    return GestureDetector(
+      onTap: () => _selectTime(context),
+      child: Text(
+        DateFormat.Hm().format(selectedDate),
+        style: const TextStyle(
+          fontSize: 24,
+          fontFamily: 'ProximaNova',
+        ),
+      ),
+    );
+  }
+
+  Widget _dateTimePickerButton() {
+    return Align(
+      alignment: const Alignment(0.0, -1.0),
+      child: Column(
+        children: <Widget>[
+          _dateButton(),
+          _timeButton(),
+        ],
       ),
     );
   }
@@ -99,8 +118,8 @@ class _NumPadState extends State<NumPad> {
         ),
         child: Center(
           child: Container(
-            height: 70, // size of the button
-            width: 112, // size of the button
+            height: 65, // size of the button
+            width: 107, // size of the button
             decoration: BoxDecoration(
               color: Colors.black87, // fill color
               borderRadius: BorderRadius.circular(16),
@@ -148,7 +167,7 @@ class _NumPadState extends State<NumPad> {
             ],
           ),
         ),
-        _DateTimePickerButton(),
+        _dateTimePickerButton(),
         if (_output != "0")
           Align(
             alignment: const Alignment(1, -0.83),
