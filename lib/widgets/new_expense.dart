@@ -16,12 +16,9 @@ class _NewExpenseState extends State<NewExpense> {
           .size
           .height, // set height to full screen height
       child: const Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.only(top: 48),
         child: Column(
           children: [
-            SizedBox(
-              height: 200,
-            ),
             Expanded(child: NumPad()),
           ],
         ),
