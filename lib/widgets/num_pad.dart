@@ -76,9 +76,22 @@ class _NumPadState extends State<NumPad> {
       children: <Widget>[
         Align(
           alignment: const Alignment(0, -0.9),
-          child: Text(
-            _output,
-            style: const TextStyle(fontSize: 64),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                "ISK", // The hardcoded currency
+                style: TextStyle(fontSize: 24, fontFamily: 'ProximaNova'),
+              ),
+              const SizedBox(
+                width:
+                    10, // You can adjust the space between the currency and the number as needed
+              ),
+              Text(
+                _output,
+                style: const TextStyle(fontSize: 64, fontFamily: 'ProximaNova'),
+              ),
+            ],
           ),
         ),
         if (_output != "0")
