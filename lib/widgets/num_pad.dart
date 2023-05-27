@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NumPad extends StatefulWidget {
   const NumPad({Key? key}) : super(key: key);
@@ -8,6 +9,7 @@ class NumPad extends StatefulWidget {
 }
 
 class _NumPadState extends State<NumPad> {
+  DateTime selectedDate = DateTime.now();
   String _output = "0";
 
   void _append(String val) {
@@ -28,6 +30,52 @@ class _NumPadState extends State<NumPad> {
         _output = "0";
       }
     });
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(selectedDate),
+    );
+    if (picked != null && picked != TimeOfDay.fromDateTime(selectedDate)) {
+      setState(() {
+        selectedDate = DateTime(selectedDate.year, selectedDate.month,
+            selectedDate.day, picked.hour, picked.minute);
+      });
+    }
+  }
+
+  Widget _DateTimePickerButton() {
+    return Align(
+      alignment: Alignment(-1.0, -0.65),
+      child: GestureDetector(
+        onTap: () async {
+          await _selectDate(context);
+          await _selectTime(context);
+        },
+        child: Text(
+          "${DateFormat.yMd().format(selectedDate)} ${DateFormat.Hm().format(selectedDate)}",
+          style: TextStyle(
+            fontSize: 24,
+            fontFamily: 'ProximaNova',
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _numButton(String? value, {void Function()? onTap, IconData? icon}) {
@@ -61,7 +109,10 @@ class _NumPadState extends State<NumPad> {
             child: icon == null
                 ? Text(
                     value!,
-                    style: const TextStyle(fontSize: 30, color: Colors.white),
+                    style: const TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontFamily: 'ProximaNova'),
                   )
                 : Icon(icon, size: 30, color: Colors.white),
           ),
@@ -89,11 +140,15 @@ class _NumPadState extends State<NumPad> {
               ),
               Text(
                 _output,
-                style: const TextStyle(fontSize: 64, fontFamily: 'ProximaNova'),
+                style: const TextStyle(
+                    fontSize: 64,
+                    fontFamily: 'ProximaNova',
+                    fontWeight: FontWeight.w600),
               ),
             ],
           ),
         ),
+        _DateTimePickerButton(),
         if (_output != "0")
           Align(
             alignment: const Alignment(1, -0.83),
@@ -127,7 +182,7 @@ class _NumPadState extends State<NumPad> {
                 for (var i = 1; i < 10; i++) _numButton(i.toString()),
                 _numButton("."),
                 _numButton("0"),
-                _numButton(null, onTap: () {}, icon: Icons.check),
+                _numButton(null, icon: Icons.check),
               ],
             ),
           ),
