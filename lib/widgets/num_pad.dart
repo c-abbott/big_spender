@@ -37,7 +37,7 @@ class _NumPadState extends State<NumPad> {
             _append(value!);
           },
       child: Container(
-        margin: const EdgeInsets.all(4.0),
+        margin: const EdgeInsets.all(6.0),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
@@ -51,8 +51,8 @@ class _NumPadState extends State<NumPad> {
         ),
         child: Center(
           child: Container(
-            height: 68, // size of the button
-            width: 107, // size of the button
+            height: 70, // size of the button
+            width: 112, // size of the button
             decoration: BoxDecoration(
               color: Colors.black87, // fill color
               borderRadius: BorderRadius.circular(16),
@@ -83,7 +83,7 @@ class _NumPadState extends State<NumPad> {
         ),
         if (_output != "0")
           Align(
-            alignment: const Alignment(0.95, -0.9),
+            alignment: const Alignment(1, -0.83),
             child: Container(
               margin: const EdgeInsets.all(4.0),
               width: 40, // change as needed
@@ -92,16 +92,12 @@ class _NumPadState extends State<NumPad> {
                 onTap: _delete,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.blue,
-                      width: 2.0,
-                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Container(
                     alignment: Alignment.center,
                     child: const Icon(Icons.backspace,
-                        size: 24), // adjust icon size as necessary
+                        size: 36), // adjust icon size as necessary
                   ),
                 ),
               ),
