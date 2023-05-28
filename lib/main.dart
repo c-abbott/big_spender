@@ -4,7 +4,7 @@ import 'package:big_spender/widgets/expenses.dart';
 void main() {
   runApp(
     MaterialApp(
-      theme: ThemeData(useMaterial3: true, fontFamily: 'ProximaNova'),
+      theme: ThemeData().copyWith(useMaterial3: true),
       home: const Expenses(),
     ),
   );
