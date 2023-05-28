@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:big_spender/widgets/num_pad.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class _NewExpenseState extends State<NewExpense> {
         padding: EdgeInsets.only(top: 48),
         child: Column(
           children: [
-            Expanded(child: NumPad()),
+            Text('Blah'),
           ],
         ),
       ),
