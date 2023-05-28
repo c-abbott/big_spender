@@ -40,7 +40,7 @@ class _ExpensesState extends State<Expenses> {
       body: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
+            padding: EdgeInsets.symmetric(vertical: 60.0, horizontal: 16.0),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
