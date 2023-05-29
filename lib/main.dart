@@ -4,9 +4,14 @@ import 'package:big_spender/widgets/expenses.dart';
 var kColorScheme =
     ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 245, 245, 250));
 
+var kDarkColorScheme = ColorScheme.fromSeed(
+    brightness: Brightness.dark, seedColor: Colors.black87);
+
 void main() {
   runApp(
     MaterialApp(
+      darkTheme: ThemeData.dark()
+          .copyWith(useMaterial3: true, colorScheme: kDarkColorScheme),
       theme: ThemeData().copyWith(
         useMaterial3: true,
         colorScheme: kColorScheme,
@@ -31,6 +36,7 @@ void main() {
               ),
             ),
       ),
+      themeMode: ThemeMode.system,
       home: const Expenses(),
     ),
   );
