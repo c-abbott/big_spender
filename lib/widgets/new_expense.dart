@@ -113,7 +113,12 @@ class _NewExpenseState extends State<NewExpense> {
                 value: _selectedCategory,
                 items: Category.values
                     .map((category) => DropdownMenuItem(
-                        value: category, child: Text(category.name)))
+                        value: category,
+                        child: Text(
+                          category.name,
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 0, 32, 80)),
+                        )))
                     .toList(),
                 onChanged: (value) {
                   if (value == null) {
